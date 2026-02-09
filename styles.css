@@ -1,198 +1,111 @@
-/* ==========================================================================
-   Global Reset & Base
-   ========================================================================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow-x:hidden; background:#000; color:#e0f2f1; font-family:'Segoe UI',sans-serif; }
 
-html, body {
-  height: 100%;
-  overflow-x: hidden;
-  background: #000;
-  color: #e0f2f1;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  scroll-behavior: smooth; /* fallback if Lenis fails */
-}
-
-/* ==========================================================================
-   Panel – full viewport cinematic sections
-   ========================================================================== */
 .panel {
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5vw 8vw;
-  overflow: hidden;
-  text-align: center;
+  position:relative;
+  height:100vh;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:5vw 8vw;
+  overflow:hidden;
 }
 
-/* Background image + parallax + blur */
 .panel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: blur(5px) brightness(0.75);
-  transform: scale(1.05) translateY(var(--parallax-y, 0%));
-  will-change: transform;
-  z-index: -2;
-  transition: transform 0.1s linear;
+  content:'';
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  filter:blur(5px) brightness(0.75);
+  transform:scale(1.05) translateY(var(--parallax-y,0%));
+  z-index:-2;
+  will-change:transform;
 }
 
-/* Dark cinematic overlay */
 .panel::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.65) 100%);
-  backdrop-filter: blur(2px);
-  z-index: -1;
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.7) 100%);
+  z-index:-1;
 }
 
-/* Specific background images (add more as needed) */
-.bg1::before { background-image: url('images/background.png'); }
-.bg2::before { background-image: url('images/background2.png'); }
-.bg3::before { background-image: url('images/background3.png'); }
-.bg4::before { background-image: url('images/background4.png'); }
+.bg1::before { background-image:url('images/background.png'); }
+.bg2::before { background-image:url('images/background2.png'); }
+.bg3::before { background-image:url('images/background3.png'); }
+.bg4::before { background-image:url('images/background4.png'); }
 
-/* ==========================================================================
-   Content layout – button left / text right (alternating)
-   ========================================================================== */
 .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8vw;
-  max-width: 1400px;
-  width: 100%;
-  z-index: 2;
+  display:flex;
+  align-items:center;
+  gap:8vw;
+  max-width:1400px;
+  width:100%;
+  z-index:2;
 }
 
-/* Alternate every other panel (even ones reverse) */
-.panel:nth-child(even) .content {
-  flex-direction: row-reverse;
-}
+.panel:nth-child(even) .content { flex-direction:row-reverse; }
 
 .text-block {
-  flex: 1;
-  max-width: 50ch;
-  text-align: left;
+  flex:1;
+  max-width:50ch;
+  text-align:left;
 }
 
 h1, h2 {
-  font-family: 'Orbitron', monospace;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-shadow: 0 0 20px rgba(0, 255, 191, 0.4);
+  font-family:'Orbitron',monospace;
+  text-shadow:0 0 20px rgba(0,255,191,0.4);
 }
 
-h1 {
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  margin-bottom: 1.2rem;
-  line-height: 1.1;
-}
+h1 { font-size:clamp(2.8rem,7vw,5rem); margin-bottom:1.2rem; }
+h2 { font-size:clamp(2.2rem,5vw,3.5rem); margin-bottom:1rem; }
+p  { font-size:clamp(1.1rem,2.5vw,1.3rem); line-height:1.6; opacity:0.92; }
 
-h2 {
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  margin-bottom: 1rem;
-}
-
-p {
-  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
-  line-height: 1.65;
-  opacity: 0.92;
-}
-
-/* Button */
 .btn {
-  display: inline-block;
-  padding: 1.1rem 2.8rem;
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 700;
-  color: #001a14;
-  background: linear-gradient(90deg, #00ff9d, #00e6c3);
-  border: 2px solid rgba(0, 255, 191, 0.4);
-  border-radius: 999px;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 0 30px rgba(0, 255, 191, 0.35);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
+  padding:1.1rem 2.8rem;
+  font-size:clamp(1.1rem,2.5vw,1.3rem);
+  font-weight:700;
+  color:#001a14;
+  background:linear-gradient(90deg,#00ff9d,#00e6c3);
+  border:2px solid rgba(0,255,191,0.4);
+  border-radius:999px;
+  cursor:pointer;
+  box-shadow:0 0 30px rgba(0,255,191,0.35);
+  transition:all 0.4s ease;
 }
 
 .btn:hover {
-  transform: translateY(-6px) scale(1.04);
-  box-shadow: 0 0 60px rgba(0, 255, 191, 0.6);
-  border-color: rgba(0, 255, 191, 0.8);
+  transform:translateY(-6px) scale(1.04);
+  box-shadow:0 0 60px rgba(0,255,191,0.7);
+  border-color:rgba(0,255,191,0.8);
 }
 
-/* ==========================================================================
-   Intro panel – offset so user has to scroll a bit to see content
-   ========================================================================== */
-.intro {
-  padding-top: 18vh;
-  align-items: flex-start;
-}
+.intro { padding-top:20vh; align-items:flex-start; }
 
-/* ==========================================================================
-   Fixed datetime
-   ========================================================================== */
 .datetime {
-  position: fixed;
-  bottom: 1.4rem;
-  right: 1.8rem;
-  font-size: 0.9rem;
-  font-weight: 400;
-  opacity: 0.55;
-  letter-spacing: 0.03em;
-  z-index: 100;
-  pointer-events: none;
-  mix-blend-mode: screen;
+  position:fixed;
+  bottom:1.5rem;
+  right:2rem;
+  font-size:0.95rem;
+  opacity:0.6;
+  z-index:100;
+  pointer-events:none;
 }
 
-/* ==========================================================================
-   Mobile – stack everything vertically
-   ========================================================================== */
-@media (max-width: 900px) {
-  .panel {
-    padding: 8vh 5vw;
+@media (max-width:900px) {
+  .content, .panel:nth-child(even) .content {
+    flex-direction:column;
+    text-align:center;
+    gap:4rem;
   }
-
-  .content,
-  .panel:nth-child(even) .content {
-    flex-direction: column;
-    gap: 3.5rem;
-    text-align: center;
-  }
-
-  .text-block {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  h1 { font-size: 2.8rem; }
-  h2 { font-size: 2.1rem; }
-  p  { font-size: 1.1rem; }
-
-  .btn {
-    padding: 1rem 2.4rem;
-    font-size: 1.15rem;
-  }
-
-  .intro {
-    padding-top: 12vh;
-  }
+  .text-block { text-align:center; max-width:100%; }
+  h1 { font-size:2.6rem; }
+  h2 { font-size:2rem; }
+  .btn { padding:1rem 2.2rem; font-size:1.1rem; }
+  .intro { padding-top:15vh; }
+  .panel { padding:6vh 5vw; }
 }
 
-/* For letter reveal – make sure spans behave nicely */
-.reveal-text span {
-  display: inline-block;
-  will-change: transform, opacity;
-}
+.reveal-text span { display:inline-block; will-change:transform,opacity; }
